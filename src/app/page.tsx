@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { StartButton } from "@/components/start-button";
 
 export default function Home() {
   return (
@@ -7,7 +7,7 @@ export default function Home() {
         <div className="container mx-auto flex items-center justify-between">
           <div>Farms platform</div>
 
-          <Button variant="outline">Get started</Button>
+          <StartButton />
         </div>
       </header>
     </section>
