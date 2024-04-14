@@ -4,9 +4,12 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --app-font: "Bricolage Grotesque", sans-serif;
+}
+
 @layer base {
   :root {
-    --app-font: "Bricolage Grotesque", sans-serif;
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
 
@@ -79,4 +82,5 @@
 }
 
 body {
+  font-family: var(--app-font);
 }
