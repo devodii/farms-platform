@@ -1,8 +1,24 @@
 export type User = {
-  id: number;
-  email: string;
-  password: string;
-  created_at: string;
+  id: string;
+  first_name: string;
+  last_name: string;
+  name: string;
+  title: string;
+  about: string;
+  emails: string[];
+  photo: string;
+  banner: string;
+  website: string;
+  phone: number;
+  country: string;
+  city: null;
+  location: Record<string, any>;
+  timezone: null;
+  language: "en";
+  urls: string[];
+  creation_date: string;
+  change_date: string;
+  instance_id: null;
 };
 
 export type Organization = {
