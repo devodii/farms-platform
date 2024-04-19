@@ -32,12 +32,14 @@ export const SignIn = () => {
           placeholder="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          required
         />
         <Input
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="****"
+          required
         />
 
         <Button>Submit</Button>
