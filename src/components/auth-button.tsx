@@ -6,13 +6,13 @@ import * as React from "react";
 import { CgSpinnerAlt } from "react-icons/cg";
 
 interface Props {
-  variant?: "login" | "logout";
+  action?: "login" | "logout";
 }
 
-export const AuthButton = ({ variant = "login" }: Props) => {
+export const AuthButton = ({ action = "login" }: Props) => {
   const [isAuthenticating, setIsAuthenticating] = React.useState(false);
 
-  return variant === "login" ? (
+  return action === "login" ? (
     <Button
       className="flex gap-1 items-center justify-center"
       disabled={isAuthenticating}

@@ -22,9 +22,9 @@ export type User = {
 };
 
 export type Organization = {
-  id: number;
+  id: string;
   name: string;
-  owner_id: number;
+  owner_id: string;
   farms: Farm[];
 };
 
@@ -39,10 +39,9 @@ export type Inventory = {
 };
 
 export type Farm = {
-  id: number;
+  id: string;
   name: string;
   location: string;
-  owner_id: number;
-  org_id: number;
+  org_id: string;
   created_at: string;
 };
