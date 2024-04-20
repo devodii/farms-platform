@@ -1,33 +1,13 @@
 import { NextAuthOptions } from "next-auth";
 import NextAuth from "next-auth/next";
-import CredentialsProvider from "next-auth/providers/credentials";
-
-const api = process.env.API_URL;
+import ZitadelProvider from "next-auth/providers/zitadel";
 
 export const authOptions: NextAuthOptions = {
   providers: [
-    CredentialsProvider({
-      name: "auth",
-      async authorize(credentials, req): any {
-        const email = req.body?.email;
-        const password = req.body?.password;
-
-        // const res = await fetch(api + "/users", {
-        //   method: "POST",
-        //   body: JSON.stringify(credentials),
-        //   headers: { "Content-Type": "application/json" },
-        // });
-
-        // const user = await res.json();
-        const authed = true;
-
-        if (authed) {
-          return { name: "Emmanuel", email };
-        }
-        // Return null if user data could not be retrieved
-        return null;
-      },
-      credentials: {},
+    ZitadelProvider({
+      clientId: process.env.ZITADEL_CLIENT_ID!,
+      issuer: process.env.ZITADEL_ISSUER,
+      clientSecret: "",
     }),
   ],
 

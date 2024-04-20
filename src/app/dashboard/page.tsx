@@ -1,9 +1,14 @@
-import { SignOutButton } from "@/components/signout-button";
+import { AuthButton } from "@/components/auth-button";
+import { getServerSession } from "next-auth";
 
-export default function DashboardPage() {
+export default async function DashboardPage() {
+  const session = await getServerSession();
+
   return (
-    <section className="min-h-screen flex items-center justify-center">
-      <SignOutButton />
+    <section className="flex-col min-h-screen flex items-center justify-center">
+      {JSON.stringify(session?.user)}
+
+      <AuthButton variant="logout" />
     </section>
   );
 }
