@@ -2,7 +2,7 @@ import { NextAuthOptions } from "next-auth";
 import NextAuth from "next-auth/next";
 import ZitadelProvider from "next-auth/providers/zitadel";
 
-export const authOptions: NextAuthOptions = {
+const authOptions: NextAuthOptions = {
   providers: [
     ZitadelProvider({
       clientId: process.env.ZITADEL_CLIENT_ID!,
