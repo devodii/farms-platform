@@ -1,29 +1,36 @@
+import { getOrganization } from "@/action/organization";
 import { AuthButton } from "@/components/auth-button";
 import { CreateOrganization } from "@/components/create-organization";
 import { Button } from "@/components/ui/button";
-import { getServerSession } from "next-auth";
+import { UserAvatar } from "@/components/user-avatar";
+import { ViewOrganization } from "@/components/view-organization";
 
 export default async function DashboardPage() {
-  const session = await getServerSession();
+  const organization = await getOrganization();
 
   return (
-    <section className="w-screen flex-col min-h-screen flex items-center py-12">
+    <section className="w-screen flex-col min-h-screen flex items-center py-12 gap-12">
       <header className="w-full border-b pb-4">
         <div className="container px-16 md:px-24 mx-auto flex items-center justify-between">
           <div>Farms platform</div>
 
-          <AuthButton action="logout" />
+          <div className="flex items-center justify-center gap-4">
+            <UserAvatar />
+            <AuthButton action="logout" />
+          </div>
         </div>
       </header>
 
-      <div className="px-6 md:px-12 mt-24 flex flex-col gap-4">
-        <span>You do not have a organization</span>
-        <CreateOrganization>
-          <Button>Create an organization</Button>
-        </CreateOrganization>
-      </div>
+      {!organization?.id && (
+        <div className="px-6 md:px-12 mt-24 flex flex-col gap-4">
+          <span>You do not have a organization</span>
+          <CreateOrganization>
+            <Button>Create an organization</Button>
+          </CreateOrganization>
+        </div>
+      )}
 
-      <div className="mt-8">{JSON.stringify(session?.user)}</div>
+      {organization?.id && <ViewOrganization organization={organization} />}
     </section>
   );
 }
