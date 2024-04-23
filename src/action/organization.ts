@@ -18,7 +18,7 @@ export const createOrg = async (formdata: FormData) => {
       body: JSON.stringify({
         id: `org_${nanoid()}`,
         owner_id: userId,
-        name: formdata.get("name"),
+        name: formdata.get("name")
       }),
       headers: {
         "Content-Type": "application/json",
@@ -50,9 +50,9 @@ export const getOrganization = async () => {
       },
     });
 
-    const organization: Organization[] = await response.json();
+    const organizations: Organization[] = await response.json();
 
-    return organization?.[0];
+    return organizations?.[0];
   } catch (error) {
     console.log("An error occured while fetching user organizations");
   }
