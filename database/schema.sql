@@ -1,9 +1,12 @@
 -- Create organizations table
 CREATE TABLE public.organization (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(255),
-    owner_id VARCHAR(255) REFERENCES users(id)
+    id VARCHAR(255) PRIMARY KEY NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    owner_id VARCHAR(255) NOT NULL REFERENCES users(id)
 );
+
+GRANT SELECT ON public.organization TO anon;
+GRANT SELECT, INSERT, UPDATE, DELETE ON public.organization TO anon;
 
 -- Create farms table
 CREATE TABLE public.farm (

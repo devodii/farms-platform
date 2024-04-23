@@ -1,3 +1,4 @@
+import { cookies } from "next/headers";
 import { NextAuthOptions } from "next-auth";
 import NextAuth from "next-auth/next";
 import ZitadelProvider from "next-auth/providers/zitadel";
@@ -14,6 +15,13 @@ const authOptions: NextAuthOptions = {
   pages: {
     signIn: "/sign-in",
     newUser: "/sign-up",
+  },
+
+  callbacks: {
+    async signIn(dto) {
+      cookies().set("authId", dto?.user?.id);
+      return true;
+    },
   },
 };
 

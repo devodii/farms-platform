@@ -1,6 +1,6 @@
 "use client";
 
-import * as React from "react";
+import { createOrg } from "@/action/organization";
 import {
   Dialog,
   DialogContent,
@@ -9,10 +9,11 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { Button } from "./ui/button";
+import { Label } from "@/components/ui/label";
+import * as React from "react";
 import { toast } from "sonner";
+import { SubmitButton } from "./submit-button";
 
 export const CreateOrganization = ({
   children: trigger,
@@ -32,22 +33,28 @@ export const CreateOrganization = ({
 
         <form
           className="flex flex-col gap-4 mt-4"
-          onSubmit={(e) => {
-            e.preventDefault();
+          action={async (formdata) => {
+            const org = await createOrg(formdata);
+
+            if (org?.success) {
+              toast("Your organization has been created", {
+                position: "top-right",
+              });
+            } else {
+              toast("An error occured while creating your organization", {
+                position: "top-right",
+              });
+            }
+
             setIsOpen(false);
-            toast("Your organization has been created", {
-              position: "top-right",
-            });
           }}
         >
           <div className="space-y-2">
             <Label htmlFor="name">Organization name</Label>
-            <Input id="name" required />
+            <Input id="name" required name="name" />
           </div>
 
-          <Button className="w-full" type="submit">
-            create
-          </Button>
+          <SubmitButton className="w-full">create</SubmitButton>
         </form>
       </DialogContent>
     </Dialog>
