@@ -7,7 +7,7 @@ import { cookies } from "next/headers";
 
 const api = process.env.API_URL;
 
-export const createOrg = async (formdata: FormData) => {
+export const createOrg = async (name: string) => {
   try {
     const userId = cookies()?.get("authId")?.value;
 
@@ -18,7 +18,7 @@ export const createOrg = async (formdata: FormData) => {
       body: JSON.stringify({
         id: `org_${nanoid()}`,
         owner_id: userId,
-        name: formdata.get("name")
+        name,
       }),
       headers: {
         "Content-Type": "application/json",
@@ -26,14 +26,11 @@ export const createOrg = async (formdata: FormData) => {
       },
     });
 
-    if (response.status === 201) {
-      revalidatePath("/dashboard");
-      return { success: true };
-    } else {
-      return { success: false };
-    }
+    revalidatePath("/dashboard");
+    return { success: true };
   } catch (error: any) {
     console.log("An error occured", { error: error?.message });
+    return { status: false };
   }
 };
 
